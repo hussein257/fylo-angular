@@ -1,0 +1,104 @@
+
+footer {
+  background-color: rgb(11, 21, 37);
+  padding-top: 400px;
+  color: #fff;
+
+
+  .logo img {
+    width: 180px;
+    margin-left: 80px;
+    }
+
+  .all {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 50px;
+    gap: 50px;
+
+    .location img {
+      width: 14px;
+    }
+
+    .lorem p {
+      max-width: 300px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: 14px;
+      }
+
+      .call {
+        display: flex;
+        gap: 10px;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .email {
+        display: flex;
+        gap: 10px;
+
+                img {
+                    width: 20px;
+                    height: 16px;
+                  }
+
+      }
+    }
+
+    .about {
+            li {
+                list-style: none;
+                margin: 0 15px;
+
+                a {
+                  text-decoration: none;
+                  font-size: 16px;
+                  color: #ffffff;
+                  font-weight: 300;
+                }
+              }
+    }
+
+        .contact {
+          li {
+            list-style: none;
+            margin: 0 15px;
+
+            a {
+              text-decoration: none;
+              font-size: 16px;
+              color: #ffffff;
+              font-weight: 300;
+            }
+          }
+        }
+
+        .socialmedia {
+          display: flex;
+          gap: 10px;
+
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            color: #ffffff;
+            background-color: #fff;
+            border: #fff solid 1px;
+          }
+        }
+
+
+  }
+}
+
+

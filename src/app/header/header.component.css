@@ -1,0 +1,10 @@
+header {
+  background-color: rgb(28, 36, 53);
+}
+header .ul {
+  display: flex;
+  flex-direction: row;
+}
+header .ul .li {
+  text-decoration: none;
+}/*# sourceMappingURL=header.component.css.map */
