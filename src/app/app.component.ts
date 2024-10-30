@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
+import { DbService } from './services/db.service';
 
 
 @Component({
@@ -13,12 +14,28 @@ import { FooterComponent } from './footer/footer.component';
   styleUrl: './app.component.scss',
 
 })
-export class AppComponent {
 
-title = 'team';
 
+export class AppComponent implements OnInit {
+  title = 'team';
+
+  constructor(private dbService: DbService) {}
+
+  ngOnInit() {
+    // Ajouter un utilisateur
+    this.dbService.utilisateurs
+      .add({
+        nom: 'Jean Dupont',
+        age: 25,
+        email: 'jean.dupont@example.com',
+      })
+      .then(() => {
+        console.log('Utilisateur ajouté avec succès !');
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'ajout de l'utilisateur :", error);
+      });
+  }
 }
-
-
 
 
