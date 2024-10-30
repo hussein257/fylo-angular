@@ -1,1 +1,56 @@
-<p>team works!</p>
+<body>
+  <div class="title text-center">
+    <h1>Exercises for muscle group</h1>
+  </div>
+  <div class="container px-5">
+    <div class="container-fluid text-center my-5">
+      @if (Loading) { <span class="fs-4 fw-semibold">loading...</span>}
+    </div>
+    @for (item of data; track data) {
+
+    <div class="row p-2 my-5 rounded mb-3 w-60">
+      <div class="col-11 d-flex justify-content-between align-items-start">
+        <div class="d-flex align-items-center mt-2">
+          <div class="row d-flex px-2">
+            <div class="col- mt-1">
+              <h4 class="m-0">{{ item.name }}</h4>
+            </div>
+            <div class="col-3 mt-0">
+              <small class="muscle">{{ item.muscle }}</small>
+            </div>
+            <div class="col-6 mt-0">
+              <small class="difficulty">{{ item.difficulty }}</small>
+            </div>
+          </div>
+        </div>
+        <div class="mt-2">
+          <p>Equipment: {{ item.equipment }} <br />Type: {{ item.type }}</p>
+        </div>
+      </div>
+      <div class="row bg-dark rounded-3 px-3 mx-2">
+        <p class="mt-2">
+          <small>Instructions: <br />{{ item.instructions }} </small>
+        </p>
+      </div>
+    </div>
+    }
+  </div>
+</body>
+
+<!--
+<div *ngIf="exercises.length">
+  <h2>Exercices pour le groupe musculaire</h2>
+  <ul>
+    <li *ngFor="let exercise of exercises">
+      <h3>{{ exercise.name }}</h3>
+      <p>Type : {{ exercise.type }}</p>
+      <p>Niveau de difficulté : {{ exercise.difficulty }}</p>
+      <p>Instructions : {{ exercise.instructions }}</p>
+    </li>
+  </ul>
+</div>
+<div *ngIf="!exercises.length">
+  <p>Aucun exercice trouvé.</p>
+</div>
+  -->
+

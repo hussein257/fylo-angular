@@ -11,9 +11,14 @@ import { FooterComponent } from './footer/footer.component';
   imports: [RouterOutlet, HeaderComponent, HomeComponent, FooterComponent, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+
 })
 export class AppComponent {
-  title = 'Fylo';
+
+title = 'team';
+
 }
+
+
 
 
