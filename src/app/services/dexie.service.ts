@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import Dexie, { Table } from 'dexie';
 
+
 // Définir une interface pour le type de données que vous allez stocker
 export interface Item {
   id: number;
   name: string;
-  description: string;
+  type: string;
+  muscle: string;
+  equipment: string;
+  difficulty: string;
+  instructions: string;
 }
+
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +24,7 @@ export class DexieService extends Dexie {
   constructor() {
     super('MyDatabase'); // Nom de la base de données
     this.version(1).stores({
-      items: 'id, name, description', // Définir le schéma et les index
+      items: 'id, name, type, muscle, equipment, difficulty, instructions', // Définir le schéma et les index
     });
   }
 
@@ -31,4 +37,8 @@ export class DexieService extends Dexie {
   async getAllItems() {
     return this.items.toArray();
   }
+
+
 }
+
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
-import { Item } from 'src/app/services/dexie.service';
+import { Item } from '../../services/db.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-data',

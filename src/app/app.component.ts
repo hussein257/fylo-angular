@@ -22,20 +22,25 @@ export class AppComponent implements OnInit {
   constructor(private dbService: DbService) {}
 
   ngOnInit() {
-    // Ajouter un utilisateur
-    this.dbService.utilisateurs
+    // Ajouter un item
+    this.dbService.items
       .add({
-        nom: 'Jean Dupont',
-        age: 25,
-        email: 'jean.dupont@example.com',
+        id: 1,
+        name: 'Pull Over',
+        muscle: 'biceps',
+        difficulty: 'pro',
+        type: 'strength',
+        equipment: 'ollazomie',
+        instructions: 'Lorem ipsum d Prometheus non proident in ',
       })
       .then(() => {
-        console.log('Utilisateur ajouté avec succès !');
+        console.log('Exercice ajouté avec succès !');
       })
       .catch((error) => {
-        console.error("Erreur lors de l'ajout de l'utilisateur :", error);
+        console.error("Erreur lors de l'ajout de l'exercice :", error);
       });
   }
 }
+
 
 

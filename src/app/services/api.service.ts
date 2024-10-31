@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'https://api.example.com/data'; // Remplacez par l'URL de votre API
+  private apiUrl = 'https://api.api-ninjas.com/v1/exercises?muscle=biceps'; // Remplacez par l'URL de votre API
 
   constructor(private http: HttpClient, private dexieService: DexieService) {}
 
