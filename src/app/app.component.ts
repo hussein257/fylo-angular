@@ -16,6 +16,7 @@ import { DbService } from './services/db.service';
 })
 
 
+
 export class AppComponent implements OnInit {
   title = 'team';
 
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Ajouter un item
     this.dbService.items
-      .add({
+      .put({
         id: 1,
         name: 'Pull Over',
         muscle: 'biceps',
@@ -41,6 +42,4 @@ export class AppComponent implements OnInit {
       });
   }
 }
-
-
 

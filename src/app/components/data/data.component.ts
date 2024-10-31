@@ -16,3 +16,5 @@ export class DataComponent implements OnInit {
     this.items = (await this.apiService.getData()) || [];
   }
 }
+
+
