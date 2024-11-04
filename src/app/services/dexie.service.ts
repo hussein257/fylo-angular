@@ -3,7 +3,7 @@ import Dexie, { Table } from 'dexie';
 
 
 // Définir une interface pour le type de données que vous allez stocker
-export interface Item {
+export interface Data {
   id: number;
   name: string;
   type: string;
@@ -18,27 +18,37 @@ export interface Item {
   providedIn: 'root',
 })
 export class DexieService extends Dexie {
-  // Table pour les items
-  items!: Table<Item, number>;
+  getAllData(): Data[] | PromiseLike<Data[]> {
+    throw new Error('Method not implemented.');
+  }
+  addOrUpdateData(item: Data) {
+    throw new Error('Method not implemented.');
+  }
+  // Table pour les itemshttp://localhost:4200/team
+  dataTable!: Table<Data, number>;
 
   constructor() {
     super('MyDatabase'); // Nom de la base de données
     this.version(1).stores({
-      items: 'id, name, type, muscle, equipment, difficulty, instructions', // Définir le schéma et les index
+      dataTable:
+        '++id, name, type, muscle, equipment, difficulty, instructions', // Définir le schéma et les index
     });
   }
 
-  // Méthode pour ajouter ou mettre à jour les données
-  async bulkPutItems(data: Item[]) {
-    return this.items.bulkPut(data);
+  // Méthode pour stocker des données dans IndexedDB
+  async addData(data: Data[]): Promise<void> {
+    await this.dataTable.bulkPut(data);
   }
 
-  // Méthode pour récupérer tous les items
-  async getAllItems() {
-    return this.items.toArray();
+  // Méthode pour récupérer des données depuis IndexedDB
+  async getData(): Promise<Data[]> {
+    return await this.dataTable.toArray();
   }
 
-
+  // Méthode pour supprimer toutes les données (facultatif)
+  async clearData(): Promise<void> {
+    await this.dataTable.clear();
+  }
 }
 
 
