@@ -1,46 +1,57 @@
-// my-component.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Data } from '@angular/router';
-import { DexieService } from '../services/dexie.service';
+import { DexieService, Data } from '../services/dexie.service';
+
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss'],
+  styleUrl: './team.component.scss',
 })
 export class TeamComponent implements OnInit {
-  dataFromApi: Data[] = [];
+listName: any;
+addNewList() {
+throw new Error('Method not implemented.');
+}
+  dataFromApi: any;
+  Loading: any;
+  DexieService: any;
 
-  constructor(private dexieservice: DexieService, private http: HttpClient) {}
+  constructor(private http: HttpClient, private dexieService: DexieService) {}
 
-  ngOnInit(): void {
-    this.syncData();
-  }
-
-  // Méthode pour synchroniser les données avec l'API
-  async syncData(): Promise<void> {
+  async fetchDataFromApi() {
     try {
-      // Récupérer les données depuis l'API
-      this.dataFromApi = await this.http
+      const response = await this.http
         .get<Data[]>('https://api.api-ninjas.com/v1/exercises?muscle=biceps')
         .toPromise();
+      this.dataFromApi = response || [];
 
-      // Stocker les données dans IndexedDB
-      await this.dexieservice.clearData(); // Facultatif : vider d'abord la base de données
-      await this.dexieservice.addData(this.dataFromApi);
+      // Ajouter les données dans Dexie
+      await this.dexieService.bulkAddData(this.dataFromApi);
 
-      console.log('Données synchronisées et stockées dans IndexedDB');
+      console.log('Données ajoutées dans IndexedDB');
     } catch (error) {
-      console.error('Erreur lors de la synchronisation des données', error);
+      console.error(
+        'Erreur lors de la récupération des données de l’API',
+        error
+      );
     }
   }
 
-  // Méthode pour récupérer les données de IndexedDB (facultatif)
-  async loadDataFromIndexedDB(): Promise<void> {
-    const data = await this.dexieservice.getData();
-    console.log('Données récupérées depuis IndexedDB :', data);
+  ngOnInit(): void {
+    this.fetchDataFromApi();
+    this.syncData();
+  }
+
+  syncData(): void {
+    // Add the required logic here for syncing data
+    this.DexieService.fetchDataFromApi().subscribe((data: any) => {
+      this.dataFromApi = data;
+    });
+  }
+
+  async loadDataFromIndexedDb() {
+    this.dataFromApi = await this.dexieService.getAllData();
+    console.log('Données chargées depuis IndexedDB:', this.dataFromApi);
   }
 }
-
-

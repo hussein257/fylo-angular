@@ -1,54 +1,56 @@
 import { Injectable } from '@angular/core';
 import Dexie, { Table } from 'dexie';
 
-
-// Définir une interface pour le type de données que vous allez stocker
+// Remplacez `Data` par l'interface de votre modèle de données
 export interface Data {
   id: number;
   name: string;
-  type: string;
   muscle: string;
-  equipment: string;
   difficulty: string;
+  equipment: string;
+  type: string;
   instructions: string;
+  // autres champs...
 }
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class DexieService extends Dexie {
-  getAllData(): Data[] | PromiseLike<Data[]> {
+  fetchDataFromApi() {
     throw new Error('Method not implemented.');
   }
-  addOrUpdateData(item: Data) {
-    throw new Error('Method not implemented.');
-  }
-  // Table pour les itemshttp://localhost:4200/team
-  dataTable!: Table<Data, number>;
+  data!: Table<Data, number>;
 
   constructor() {
     super('MyDatabase'); // Nom de la base de données
     this.version(1).stores({
-      dataTable:
-        '++id, name, type, muscle, equipment, difficulty, instructions', // Définir le schéma et les index
+      data: 'id, name, muscle, difficulty, equipment, type, instructions', // Clés pour l'indexation. Ajoutez ici les propriétés de votre modèle
     });
   }
 
-  // Méthode pour stocker des données dans IndexedDB
-  async addData(data: Data[]): Promise<void> {
-    await this.dataTable.bulkPut(data);
+  async addData(data: Data) {
+    await this.data.add(data);
   }
 
-  // Méthode pour récupérer des données depuis IndexedDB
-  async getData(): Promise<Data[]> {
-    return await this.dataTable.toArray();
+  async bulkAddData(dataArray: Data[]) {
+    await this.data.bulkAdd(dataArray);
   }
 
-  // Méthode pour supprimer toutes les données (facultatif)
-  async clearData(): Promise<void> {
-    await this.dataTable.clear();
+  async getAllData() {
+    return await this.data.toArray();
+  }
+
+  async getDataById(id: number) {
+    return await this.data.get(id);
+  }
+
+  async deleteData(id: number) {
+    await this.data.delete(id);
+  }
+
+  async clearData() {
+    await this.data.clear();
   }
 }
-
 
